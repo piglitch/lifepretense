@@ -23,7 +23,7 @@ const Footer = () => {
       <div className='flex flex-col w-full'>
         <div className='flex items-start flex-col'>
           <Image 
-            src="/logo-purple.svg"
+            src="/logo-no-background.svg"
             width={115}
             height={38}
             alt='flexible'
