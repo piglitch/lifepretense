@@ -48,4 +48,4 @@ const Navbar = async () => {
     </nav>
     )
 }
-export default Navbar
+export default Navbar;
