@@ -9,7 +9,7 @@ export const getUserQuery =`
             githubUrl
         }
     }
-`
+`;
 
 export const createUserMutation = `
     mutation CreateUser($input: UserCreateInput!){
@@ -24,4 +24,4 @@ export const createUserMutation = `
             }
         }
     }
-`
+`;
