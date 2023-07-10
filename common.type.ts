@@ -32,7 +32,6 @@ export interface UserProfile {
     description: string | null;
     avatarUrl: string;
     githubUrl: string | null;
-    linkedinUrl: string | null;
     projects: {
       edges: { node: ProjectInterface }[];
       pageInfo: {
