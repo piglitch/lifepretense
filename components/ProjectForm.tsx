@@ -4,6 +4,8 @@ import { SessionInterface } from '@/common.type';
 import { ChangeEvent } from 'react';
 import Image from 'next/image';
 import FormField from './FormField';
+import CustomMenu from './CustomMenu';
+import { categoryFilters } from '@/constants';
 
 type Props = {
   type: string,
@@ -19,7 +21,8 @@ const ProjectForm = ({ type, session }: Props) => {
   }
   
   const form = {
-    image: ''
+    image: '',
+   
   }
   return (
     <form
@@ -51,9 +54,44 @@ const ProjectForm = ({ type, session }: Props) => {
       <FormField 
         title="Title"
         state={form.title}
-        placeholder="Lifepretense"
+        placeholder="Oooh look at meee!!!"
         setState={(value) => handleStateChange('title', value)}
       />
+
+      <FormField 
+        title="Description"
+        state={form.description}
+        placeholder="This pic really matters"
+        setState={(value) => handleStateChange('description', value)}
+      />
+
+      <FormField 
+        type='url'
+        title="Website Url"
+        state={form.liveSiteUrl}          
+        placeholder="https://blessedWokeupLikethis.com"
+        setState={(value) => handleStateChange('liveSiteUrl', value)}
+      />
+
+      <FormField
+        type='url' 
+        title="Github Url"
+        state={form.githubUrl}
+        placeholder="Your github link"
+        setState={(value) => handleStateChange('githubUrl', value)}
+      />
+
+      <CustomMenu 
+        title="Category"
+        state={form.category}
+        filters={categoryFilters}
+        setState={(value) => handleStateChange('category', value)}
+      />
+
+      <div className='flexStart w-full'>
+        <button>Create</button> 
+      </div>
+
     </form>
   )
 }
