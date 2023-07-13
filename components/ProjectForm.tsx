@@ -1,7 +1,7 @@
 "use client"
 
 import { SessionInterface } from '@/common.type';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import FormField from './FormField';
 import CustomMenu from './CustomMenu';
@@ -17,13 +17,18 @@ const ProjectForm = ({ type, session }: Props) => {
   const handleFormSubmit = (e: React.FormEvent) => {};
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {};
   const handleStateChange = (fieldName: string, value: string) => {
-
+    setform((prevState) => ({...prevState, [fieldName]: value}))
   }
   
-  const form = {
-    image: '',
-   
-  }
+  const [isSubmitting, setisSubmitting] = useState(false);
+  const [form, setform] = useState({
+    title:'',
+    description:'',
+    image:'',
+    liveSiteUrl:'',
+    githubUrl:'',
+    category:''
+  })
   return (
     <form
       onSubmit={handleFormSubmit}
@@ -80,7 +85,7 @@ const ProjectForm = ({ type, session }: Props) => {
         placeholder="Your github link"
         setState={(value) => handleStateChange('githubUrl', value)}
       />
-
+      
       <CustomMenu 
         title="Category"
         state={form.category}
