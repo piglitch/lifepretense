@@ -7,6 +7,8 @@ import FormField from './FormField';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constants';
 import Button from './Button';
+import { createNewProject, fetchTolken } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   type: string,
@@ -14,18 +16,25 @@ type Props = {
 }
 
 const ProjectForm = ({ type, session }: Props) => {
+  const router = useRouter();
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setisSubmitting(true);
 
+    const { token } = await fetchTolken();
+
     try {
       if(type === 'create'){
-        
+        await createNewProject(form, session?.user?.id, token);
+
+        router.push('/');
       }
     } catch (error){
-
+      console.log(error)
+    } finally{
+      setisSubmitting(false);
     }
   };
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,8 +62,6 @@ const ProjectForm = ({ type, session }: Props) => {
     title:'',
     description:'',
     image:'',
-    liveSiteUrl:'',
-    githubUrl:'',
     category:''
   })
   return (
@@ -98,21 +105,6 @@ const ProjectForm = ({ type, session }: Props) => {
         setState={(value) => handleStateChange('description', value)}
       />
 
-      <FormField 
-        type='url'
-        title="Website Url"
-        state={form.liveSiteUrl}          
-        placeholder="https://blessedWokeupLikethis.com"
-        setState={(value) => handleStateChange('liveSiteUrl', value)}
-      />
-
-      <FormField
-        type='url' 
-        title="Github Url"
-        state={form.githubUrl}
-        placeholder="Your github link"
-        setState={(value) => handleStateChange('githubUrl', value)}
-      />
       
       <CustomMenu 
         title="Category"
