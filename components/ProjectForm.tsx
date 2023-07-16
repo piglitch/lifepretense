@@ -6,6 +6,7 @@ import Image from 'next/image';
 import FormField from './FormField';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constants';
+import Button from './Button';
 
 type Props = {
   type: string,
@@ -14,8 +15,35 @@ type Props = {
 
 const ProjectForm = ({ type, session }: Props) => {
 
-  const handleFormSubmit = (e: React.FormEvent) => {};
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {};
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setisSubmitting(true);
+
+    try {
+      if(type === 'create'){
+        
+      }
+    } catch (error){
+
+    }
+  };
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const file = e.target.files?.[0];
+    if(!file) return;
+    if(!file.type.includes('image')) {
+      return alert('Please upload an image file');
+    }
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const result = reader.result as string
+      handleStateChange('image', result);
+    }
+  };
   const handleStateChange = (fieldName: string, value: string) => {
     setform((prevState) => ({...prevState, [fieldName]: value}))
   }
@@ -94,7 +122,16 @@ const ProjectForm = ({ type, session }: Props) => {
       />
 
       <div className='flexStart w-full'>
-        <button>Create</button> 
+        <Button
+          title={
+          isSubmitting ? `${type === 'create' ? 'Creating' : 'Editing'}`: 
+          `${type === 'create' ? 'Create' : 'Edit'}`
+        }
+          type="submit"
+          leftIcon={isSubmitting ? 
+          "" : '/plus.svg'}
+          isSubmitting={isSubmitting}
+        /> 
       </div>
 
     </form>
