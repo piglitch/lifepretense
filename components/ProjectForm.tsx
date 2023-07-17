@@ -7,7 +7,7 @@ import FormField from './FormField';
 import CustomMenu from './CustomMenu';
 import { categoryFilters } from '@/constants';
 import Button from './Button';
-import { createNewProject, fetchTolken } from '@/lib/actions';
+import { createNewProject, fetchToken } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -23,7 +23,7 @@ const ProjectForm = ({ type, session }: Props) => {
 
     setisSubmitting(true);
 
-    const { token } = await fetchTolken();
+    const { token } = await fetchToken();
 
     try {
       if(type === 'create'){
@@ -49,7 +49,7 @@ const ProjectForm = ({ type, session }: Props) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      const result = reader.result as string
+      const result = reader.result as string;
       handleStateChange('image', result);
     }
   };
@@ -59,10 +59,10 @@ const ProjectForm = ({ type, session }: Props) => {
   
   const [isSubmitting, setisSubmitting] = useState(false);
   const [form, setform] = useState({
-    title:'',
-    description:'',
-    image:'',
-    category:''
+    title: '',
+    description: '',
+    image: '',
+    category: '',
   })
   return (
     <form
@@ -79,7 +79,7 @@ const ProjectForm = ({ type, session }: Props) => {
         accept='image/*' 
         required={ type === 'create' }
         className='form_image-input'
-        onChange={handleChangeImage}
+        onChange={(e) => handleChangeImage(e)}
         />
         {form.image &&(
           <Image 

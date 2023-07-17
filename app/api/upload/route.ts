@@ -7,13 +7,6 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET  
   });
 
-export async function GET() {
-    return NextResponse.json(
-        { message: 'Hello from upload' },
-        { status: 200 }
-    )
-}     
-
 export async function POST(request: Request){
     const { path } = await request.json();
 
@@ -21,7 +14,7 @@ export async function POST(request: Request){
         return NextResponse.json(
             {message: 'Image path is required'}, 
             { status: 400 }
-        ) 
+        ); 
     }
 
     try {
@@ -34,7 +27,8 @@ export async function POST(request: Request){
         const result = await cloudinary.uploader.upload(path, options);
         return NextResponse.json(result, { status: 200 })
     } catch (error) {
-        return NextResponse.json({message: error}, { status: 500 })
+        console.error('Cloudinary upload error', error);
+        return NextResponse.json({message: "Failed to upload image on Cloudinary" }, { status: 500 })
     }
 
 }
