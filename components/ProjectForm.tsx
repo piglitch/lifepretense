@@ -32,7 +32,7 @@ const ProjectForm = ({ type, session }: Props) => {
         router.push('/');
       }
     } catch (error){
-      console.log(error)
+      throw error
     } finally{
       setisSubmitting(false);
     }

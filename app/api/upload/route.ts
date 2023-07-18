@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({ 
@@ -27,8 +27,7 @@ export async function POST(request: Request){
         const result = await cloudinary.uploader.upload(path, options);
         return NextResponse.json(result, { status: 200 })
     } catch (error) {
-        console.error('Cloudinary upload error', error);
-        return NextResponse.json({message: "Failed to upload image on Cloudinary" }, { status: 500 })
+        return NextResponse.json({message: error }, { status: 500 })
     }
 
 }

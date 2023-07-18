@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { createProjectMutation, createUserMutation, getUserQuery } from "../graphql";
+import { createProjectMutation, createUserMutation, getUserQuery } from "@/graphql";
 import { ProjectForm } from "@/common.type";
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -37,7 +37,7 @@ variables = {}) => {
     return await client.request(query, variables)
 
     } catch (error){
-            throw error;
+           throw error
     }
 }
 
@@ -67,9 +67,9 @@ export const createUser = (name: string, email: string, avatarUrl: string) => {
     client.setHeader('x-api-key', apiKey);
     const variables = {
         input: {
-            name: name,
-            email: email,
-            avatarUrl: avatarUrl
+            name,
+            email,
+            avatarUrl
           },
     };
     return makeGraphQLRequest(createUserMutation, variables)
