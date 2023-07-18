@@ -1,5 +1,4 @@
-import { GraphQLClient, Headers } from "graphql-request";
-
+import { GraphQLClient} from "graphql-request";
 import { createProjectMutation, createUserMutation, getUserQuery } from "@/graphql";
 import { ProjectForm } from "@/common.type";
 
@@ -13,10 +12,10 @@ const serverUrl = isProduction ? process.env.NEXT_PUBLIC_SERVER_URL  : 'http://l
 const clientOptions = {
   headers: {
     'x-api-key': apiKey,
-  } as Headers,
+  },
 };
 
-const client = new GraphQLClient(apiUrl,clientOptions)
+const client = new GraphQLClient(apiUrl, clientOptions)
 
 export const fetchToken = async () => {
     try {
