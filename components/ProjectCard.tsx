@@ -28,7 +28,7 @@ const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props ) => {
         </Link>
         <div className="flexBetween w-full px-2 mt-3 font-semibold text-sm">
           <Link href={`/profile/${userId}`}>
-            <div>
+            <div className="flexCenter gap-2">
               <Image 
               src={avatarUrl}
               width={24}
@@ -36,8 +36,31 @@ const ProjectCard = ({ id, image, title, name, avatarUrl, userId }: Props ) => {
               className="rounded-full"
               alt="Profile Image"
               />
+              <p>{name}</p>
             </div>
           </Link>
+
+          <div className="flexCenter gap-3">
+            <div className="flexCenter gap-2">
+              <Image 
+                src="/heart.svg"
+                width={12}
+                height={12}
+                alt="heart"
+              />
+              <p className="text-sm">69</p>
+            </div>
+
+            <div className="flexCenter gap-2">
+              <Image 
+                src="/eye.svg"
+                width={12}
+                height={12}
+                alt="eye"
+              />
+              <p className="text-sm">4.2k</p>
+            </div>
+          </div>
         </div>
     </div>
   )
